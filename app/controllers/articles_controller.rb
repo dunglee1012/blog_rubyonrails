@@ -4,7 +4,9 @@ class ArticlesController < ApplicationController
     if params[:search].present?
       @articles = Article.where('title LIKE ?', "%#{params[:search]}%")
     else
-      @articles = Article.all
+      #@articles = Article.all 
+      #pagging 
+      @articles = Article.page(params[:page]).per(5)
     end
   end
 

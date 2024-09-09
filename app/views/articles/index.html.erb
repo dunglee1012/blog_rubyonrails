@@ -28,9 +28,8 @@ Our blog has <%= Article.public_count %> articles and counting!
         <% end %>
       <% end %>
     </ul>
+    <%= paginate @articles, theme: 'twitter-bootstrap-3' %>
   </div>
 </div>
-
-
 
 <%= link_to "New Article", new_article_path %>
