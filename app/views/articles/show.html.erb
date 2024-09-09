@@ -1,7 +1,24 @@
-<h1><%= @article.title %></h1>
-
-<p><%= @article.body %></p>
-
+<h1 style="text-align:center">Article</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"># Identifier</th>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Created_At (DD-MM-YYYY)</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @article.id %></td>
+      <td><%= image_tag(@article.image) if @article.image.present? %></td>
+      <td><%= @article.title %></td>
+      <td><%= @article.created_at %></td>
+      <td><%= @article.status %></td>
+    </tr>
+  </tbody>
+</table>
 <ul>
   <li><%= link_to "Edit", edit_article_path(@article) %></li>
   <li><%= link_to "Destroy", article_path(@article), data: {
@@ -9,9 +26,7 @@
                     turbo_confirm: "Are you sure?"
                   } %></li>
 </ul>
-
-<h2>Comments</h2>
+<h4>Comments</h4>
 <%= render @article.comments %>
-
-<h2>Add a comment:</h2>
+<h5>Add a comment:</h5>
 <%= render "comments/form", article: @article %>

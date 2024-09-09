@@ -1,7 +1,11 @@
 class ArticlesController < ApplicationController
   http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
   def index
-    @articles = Article.all
+    if params[:search].present?
+      @articles = Article.where('title LIKE ?', "%#{params[:search]}%")
+    else
+      @articles = Article.all
+    end
   end
 
   def show
@@ -43,8 +47,19 @@ class ArticlesController < ApplicationController
     redirect_to root_path, status: :see_other
   end
 
+  def active_article
+    @articles = Article.where(status: ['public', 'private'])
+    # render :index #trả về index luôn
+    render :active_article
+  end
+
+  def archived_article
+    @articles = Article.where(status: 'archived')
+    render :archived_article
+  end
+
   private
     def article_params
-      params.require(:article).permit(:title, :body, :status)
+      params.require(:article).permit(:title, :body, :status, :image)
     end
 end
