@@ -1,4 +1,4 @@
-<%= form_with model: article do |form| %>
+<%= form_with model: article, local: true, html: { multipart: true } do |form| %>
   <div>
     <%= form.label :title %><br>
     <%= form.text_field :title %>
@@ -22,7 +22,10 @@
 
   <div>
     <%= form.label :image %><br>
-    <%= form.text_area :image %><br>
+    <%= form.file_field :image %><br>
+    <% if article.image.attached? %>
+      <%= image_tag article.image, size: "100x100" %>
+    <% end %>
   </div>
 
   <div>

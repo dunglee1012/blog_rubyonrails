@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   include Visible
+  has_one_attached :image
 
   has_many :comments, dependent: :destroy
 

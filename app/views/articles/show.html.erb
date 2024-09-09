@@ -12,7 +12,7 @@
   <tbody>
     <tr>
       <td><%= @article.id %></td>
-      <td><%= image_tag(@article.image) if @article.image.present? %></td>
+      <td><%= image_tag(@article.image, size: "100x100") if @article.image.present? %></td>
       <td><%= @article.title %></td>
       <td><%= @article.created_at %></td>
       <td><%= @article.status %></td>
